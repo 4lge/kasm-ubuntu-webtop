@@ -28,7 +28,9 @@ RUN flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.
 RUN flatpak update -y
 RUN wget https://cdn.zoom.us/prod/6.6.0.4410/zoom_amd64.deb && dpkg -i zoom_amd64.deb || apt-get install -f -y
 RUN add-apt-repository ppa:obsproject/obs-studio
+RUN apt-get update || /bin/true
 RUN apt install -y obs-studio
+RUN wet https://downloads.vivaldi.com/stable/vivaldi-stable_7.6.3797.63-1_amd64.deb && dpkg -i vivaldi-stable_7.6.3797.63-1_amd64.deb || apt-get install -f -y
 RUN apt-get clean
 
 ######### End Customizations ###########

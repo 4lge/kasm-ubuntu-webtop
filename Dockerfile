@@ -1,4 +1,4 @@
-FROM docker.io/kasmweb/ubuntu-noble-desktop:1.17-rolling-daily
+FROM docker.io/kasmweb/ubuntu-noble-desktop:1.17.0-rolling-daily
 USER root
 
 ENV HOME /home/kasm-default-profile

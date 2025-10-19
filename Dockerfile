@@ -31,7 +31,7 @@ RUN add-apt-repository ppa:obsproject/obs-studio
 RUN apt-get update || /bin/true
 RUN apt install -y obs-studio
 RUN wet https://downloads.vivaldi.com/stable/vivaldi-stable_7.6.3797.63-1_amd64.deb && dpkg -i vivaldi-stable_7.6.3797.63-1_amd64.deb || apt-get install -f -y
-RUN apt install btop htop inxi neofetch inkscape 
+RUN apt install -y btop htop inxi neofetch inkscape 
 RUN apt-get clean
 
 ######### End Customizations ###########

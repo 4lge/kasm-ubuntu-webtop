@@ -29,7 +29,8 @@ RUN flatpak update -y
 RUN flatpak install -y app/org.onlyoffice.desktopeditors
 RUN flatpak install -y app/org.telegram.desktop
 RUN flatpak install -y app/org.signal.Signal
-RUN flatpak install -y app/com.visualstudio.code
+# RUN flatpak install -y app/com.visualstudio.code
+RUN flatpak install -y app/com.google.Chrome
 RUN apt-get install -y firefox thunderbird
 RUN wget https://cdn.zoom.us/prod/6.6.0.4410/zoom_amd64.deb && dpkg -i zoom_amd64.deb || apt-get install -f -y
 RUN add-apt-repository ppa:obsproject/obs-studio

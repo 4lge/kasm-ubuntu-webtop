@@ -18,15 +18,15 @@ RUN gpg --armor --export '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7' | gpg --dear
 RUN echo "deb https://cloud.r-project.org/bin/linux/ubuntu noble-cran40/" > /etc/apt/sources.list.d/cran.list
 RUN apt-get update || /bin/true
 RUN apt-get install -y r-base r-base-dev build-essential
-RUN wget https://download1.rstudio.org/electron/jammy/amd64/rstudio-2025.09.1-401-amd64.deb && dpkg -i rstudio-2025.09.1-401-amd64.deb || apt-get install -f -y
+RUN wget https://download1.rstudio.org/electron/jammy/amd64/rstudio-2026.01.0-392-amd64.deb && dpkg -i rstudio-2026.01.0-392-amd64.deb || apt-get install -f -y
 RUN perl -pi -e "s%/usr/lib/rstudio/rstudio%/usr/lib/rstudio/rstudio --no-sandbox %" /usr/share/applications/rstudio.desktop
 RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.25/quarto-1.8.25-linux-amd64.deb && dpkg -i quarto-1.8.25-linux-amd64.deb || apt-get install -f -y
 RUN apt-get install -y pspp emacs-gtk elpa-ess texlive-latex-extra auctex preview-latex-style texlive-bibtex-extra texlive-fonts-extra texlive-formats-extra texlive-extra-utils
-RUN apt install -y texmaker  libwmf-bin  texlive-lang-german emacs-gtk maxima-emacs maxima-share pspp 
+RUN apt install -y texmaker  libwmf-bin  texlive-lang-german maxima-emacs maxima-share pspp 
 RUN apt install -y flatpak
 RUN flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 RUN flatpak update -y
-RUN flatpak install -y org.onlyoffice.desktopeditors
+RUN flatpak install -y app/org.onlyoffice.desktopeditors
 RUN flatpak install -y app/org.telegram.desktop
 RUN flatpak install -y app/org.signal.Signal
 RUN flatpak install -y app/com.visualstudio.code

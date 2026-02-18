@@ -26,8 +26,8 @@ RUN apt install -y texmaker  libwmf-bin  texlive-lang-german emacs-gtk maxima-em
 RUN apt install -y flatpak
 RUN flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 RUN flatpak update -y
-RUN flatpak install -y onlyoffice
-RUN flatpak install -y  app/org.telegram.desktop
+RUN flatpak install -y org.onlyoffice.desktopeditors
+RUN flatpak install -y app/org.telegram.desktop
 RUN flatpak install -y app/org.signal.Signal
 RUN flatpak install -y app/com.visualstudio.code
 RUN apt-get install -y firefox thunderbird

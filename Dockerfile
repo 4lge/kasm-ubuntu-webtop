@@ -20,7 +20,7 @@ RUN apt-get update || /bin/true
 RUN apt-get install -y r-base r-base-dev build-essential
 RUN wget https://download1.rstudio.org/electron/jammy/amd64/rstudio-2026.01.0-392-amd64.deb && dpkg -i rstudio-2026.01.0-392-amd64.deb || apt-get install -f -y
 RUN perl -pi -e "s%/usr/lib/rstudio/rstudio%/usr/lib/rstudio/rstudio --no-sandbox %" /usr/share/applications/rstudio.desktop
-RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.25/quarto-1.8.25-linux-amd64.deb && dpkg -i quarto-1.8.25-linux-amd64.deb || apt-get install -f -y
+RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.27/quarto-1.8.27-linux-amd64.deb && dpkg -i quarto-1.8.27-linux-amd64.deb || apt-get install -f -y
 RUN apt-get install -y pspp emacs-gtk elpa-ess texlive-latex-extra auctex preview-latex-style texlive-bibtex-extra texlive-fonts-extra texlive-formats-extra texlive-extra-utils
 RUN apt install -y texmaker  libwmf-bin  texlive-lang-german maxima-emacs maxima-share pspp 
 RUN apt install -y flatpak
@@ -29,15 +29,16 @@ RUN flatpak update -y
 RUN flatpak install -y app/org.onlyoffice.desktopeditors
 RUN flatpak install -y app/org.telegram.desktop
 RUN flatpak install -y app/org.signal.Signal
-# RUN flatpak install -y app/com.visualstudio.code
-# RUN flatpak install -y app/com.google.Chrome
+RUN flatpak install -y app/com.seafile.Client
+RUN flatpak install -y app/com.xnview.XnViewMP
+RUN flatpak install -y com.github.IsmaelMartinez.teams_for_linux
 RUN apt-get install -y firefox thunderbird
-RUN wget https://cdn.zoom.us/prod/6.6.0.4410/zoom_amd64.deb && dpkg -i zoom_amd64.deb || apt-get install -f -y
+# RUN wget https://cdn.zoom.us/prod/6.6.0.4410/zoom_amd64.deb && dpkg -i zoom_amd64.deb || apt-get install -f -y
 RUN add-apt-repository ppa:obsproject/obs-studio
 RUN apt-get update || /bin/true
 RUN apt install -y obs-studio
-RUN wet https://downloads.vivaldi.com/stable/vivaldi-stable_7.6.3797.63-1_amd64.deb && dpkg -i vivaldi-stable_7.6.3797.63-1_amd64.deb || apt-get install -f -y
-RUN apt install -y btop htop inxi neofetch inkscape  gimp 
+RUN wget https://downloads.vivaldi.com/stable/vivaldi-stable_7.8.3925.66-1_amd64.deb && dpkg -i vivaldi-stable_78.3925.66-1_amd64.deb || apt-get install -f -y
+RUN apt install -y btop htop inxi neofetch inkscape  gimp xviewer wxmaxima liboctave-dev
 RUN apt-get clean
 
 ######### End Customizations ###########

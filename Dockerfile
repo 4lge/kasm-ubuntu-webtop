@@ -11,7 +11,7 @@ WORKDIR $HOME
 
 
 RUN touch $HOME/Desktop/hello.txt
-RUN apt-get update && apt-get install -y build-essential dirmngr apt-transport-https ca-certificates software-properties-common btop htop inxi neofetch inkscape octave less screen pspp emacs-gtk elpa-ess texlive-latex-extra auctex preview-latex-style texlive-bibtex-extra texlive-fonts-extra texlive-formats-extra texlive-extra-utils texmaker  libwmf-bin  texlive-lang-german maxima-emacs maxima-share pspp flatpak
+RUN apt-get update && apt-get install -y build-essential dirmngr apt-transport-https ca-certificates software-properties-common btop htop inxi neofetch inkscape octave less screen pspp emacs-gtk elpa-ess texlive-latex-extra auctex preview-latex-style texlive-bibtex-extra texlive-fonts-extra texlive-formats-extra texlive-extra-utils texmaker  libwmf-bin  texlive-lang-german maxima-emacs maxima-share pspp flatpak autorandr
 RUN gpg --keyserver keyserver.ubuntu.com --recv-key '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7'
 RUN gpg --armor --export '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7' | gpg --dearmor | sudo tee /usr/share/keyrings/cran.gpg > /dev/null
 RUN echo "deb https://cloud.r-project.org/bin/linux/ubuntu noble-cran40/" > /etc/apt/sources.list.d/cran.list &&  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 || /bin/true
@@ -20,24 +20,18 @@ RUN wget https://download1.rstudio.org/electron/jammy/amd64/rstudio-2026.01.0-39
 RUN perl -pi -e "s%/usr/lib/rstudio/rstudio%/usr/lib/rstudio/rstudio --no-sandbox %" /usr/share/applications/rstudio.desktop
 RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.27/quarto-1.8.27-linux-amd64.deb && dpkg -i quarto-1.8.27-linux-amd64.deb || apt-get install -f -y
 RUN wget https://downloads.vivaldi.com/stable/vivaldi-stable_7.8.3925.70-1_amd64.deb && dpkg -i vivaldi-stable_7.8.3925.70-1_amd64.deb || apt-get install -f -y
-RUN wget https://s3.eu-central-1.amazonaws.com/download.seadrive.org/Seafile-x86_64-9.0.15.AppImage && mv Seafile-x86_64-9.0.15.AppImage /opt && chmod 755 /opt/Seafile-x86_64-9.0.15.AppImage && ln -sf /opt/Seafile-x86_64-9.0.15.AppImage /usr/bin/seafile 
-COPY <<EOT /usr/share/applications/seafile.desktop
-[Desktop Entry]
-Name=Seafile
-Comment=Seafile desktop sync client
-Exec=/usr/bin/seafile
-Icon=seafile.png
-Type=Application
-Categories=Network;FileTransfer;
+RUN perl -pi -e "s%/vivaldi-stable%vivaldi-stable --no-sandbox %" /usr/share/applications/vivaldi.desktop
+RUN <<EOT 
+for i in libseafile0t64_9.0.14-1_amd64.deb seafile-cli_9.0.14-1_all.deb python3-seafile_9.0.14-1_all.deb   seafile-daemon_9.0.14-1_amd64.deb  seafile-gui_9.0.14_amd64.deb; do
+  wget https://www.algepop.net/users/alge/seafile-9.0.14-ubuntu24.04/$i
+done
+dpkg -i *seafile*.deb
 EOT
-RUN wget https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/seafile.png && mv seafile.png /usr/share/pixmaps/
 RUN flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo && flatpak update -y
 RUN flatpak install -y app/org.onlyoffice.desktopeditors
 RUN flatpak install -y app/org.telegram.desktop
 RUN flatpak install -y app/org.signal.Signal
-# RUN flatpak install -y app/com.seafile.Client
 # RUN flatpak install -y app/com.xnview.XnViewMP
-# RUN flatpak install -y app/com.vivaldi.Vivaldi
 # RUN flatpak install -y com.github.IsmaelMartinez.teams_for_linux
 RUN add-apt-repository ppa:obsproject/obs-studio && apt-get update || /bin/true && apt install -y obs-studio
 RUN apt-get clean

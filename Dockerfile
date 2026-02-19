@@ -19,14 +19,26 @@ RUN apt-get update || /bin/true && apt-get install -y r-base r-base-dev
 RUN wget https://download1.rstudio.org/electron/jammy/amd64/rstudio-2026.01.0-392-amd64.deb && dpkg -i rstudio-2026.01.0-392-amd64.deb || apt-get install -f -y
 RUN perl -pi -e "s%/usr/lib/rstudio/rstudio%/usr/lib/rstudio/rstudio --no-sandbox %" /usr/share/applications/rstudio.desktop
 RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.27/quarto-1.8.27-linux-amd64.deb && dpkg -i quarto-1.8.27-linux-amd64.deb || apt-get install -f -y
+RUN wget https://downloads.vivaldi.com/stable/vivaldi-stable_7.8.3925.70-1_amd64.deb && dpkg -i vivaldi-stable_7.8.3925.70-1_amd64.deb || apt-get install -f -y
+RUN wget https://s3.eu-central-1.amazonaws.com/download.seadrive.org/Seafile-x86_64-9.0.15.AppImage && mv Seafile-x86_64-9.0.15.AppImage /opt && chmod 755 /opt/Seafile-x86_64-9.0.15.AppImage && ln -sf /opt/Seafile-x86_64-9.0.15.AppImage /usr/bin/seafile 
+COPY <<EOT /usr/share/applications/seafile.desktop
+[Desktop Entry]
+Name=Seafile
+Comment=Seafile desktop sync client
+Exec=/usr/bin/seafile
+Icon=seafile.png
+Type=Application
+Categories=Network;FileTransfer;
+EOT
+RUN wget https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/seafile.png && mv seafile.png /usr/share/pixmaps/
 RUN flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo && flatpak update -y
 RUN flatpak install -y app/org.onlyoffice.desktopeditors
 RUN flatpak install -y app/org.telegram.desktop
 RUN flatpak install -y app/org.signal.Signal
-RUN flatpak install -y app/com.seafile.Client
-RUN flatpak install -y app/com.xnview.XnViewMP
-RUN flatpak install -y app/com.vivaldi.Vivaldi
-RUN flatpak install -y com.github.IsmaelMartinez.teams_for_linux
+# RUN flatpak install -y app/com.seafile.Client
+# RUN flatpak install -y app/com.xnview.XnViewMP
+# RUN flatpak install -y app/com.vivaldi.Vivaldi
+# RUN flatpak install -y com.github.IsmaelMartinez.teams_for_linux
 RUN add-apt-repository ppa:obsproject/obs-studio && apt-get update || /bin/true && apt install -y obs-studio
 RUN apt-get clean
 

@@ -4,6 +4,7 @@ USER root
 ENV HOME /home/kasm-default-profile
 ENV STARTUPDIR /dockerstartup
 ENV INST_SCRIPTS $STARTUPDIR/install
+ENV XDG_DATA_DIRS /usr/local/share:/usr/share:/var/lib/flatpak/exports/share
 WORKDIR $HOME
 
 ######### Customize Container Here ###########
@@ -18,7 +19,7 @@ RUN gpg --armor --export '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7' | gpg --dear
 RUN echo "deb https://cloud.r-project.org/bin/linux/ubuntu noble-cran40/" > /etc/apt/sources.list.d/cran.list
 RUN apt-get update || /bin/true
 RUN apt-get install -y r-base r-base-dev
-RUN apt install -y btop htop inxi neofetch inkscape octave
+RUN apt install -y btop htop inxi neofetch inkscape octave less screen
 RUN wget https://download1.rstudio.org/electron/jammy/amd64/rstudio-2026.01.0-392-amd64.deb && dpkg -i rstudio-2026.01.0-392-amd64.deb || apt-get install -f -y
 RUN perl -pi -e "s%/usr/lib/rstudio/rstudio%/usr/lib/rstudio/rstudio --no-sandbox %" /usr/share/applications/rstudio.desktop
 RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.27/quarto-1.8.27-linux-amd64.deb && dpkg -i quarto-1.8.27-linux-amd64.deb || apt-get install -f -y

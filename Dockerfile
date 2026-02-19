@@ -17,7 +17,8 @@ RUN gpg --keyserver keyserver.ubuntu.com --recv-key '95C0FAF38DB3CCAD0C080A7BDC7
 RUN gpg --armor --export '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7' | gpg --dearmor | sudo tee /usr/share/keyrings/cran.gpg > /dev/null
 RUN echo "deb https://cloud.r-project.org/bin/linux/ubuntu noble-cran40/" > /etc/apt/sources.list.d/cran.list
 RUN apt-get update || /bin/true
-RUN apt-get install -y r-base r-base-dev build-essential
+RUN apt-get install -y r-base r-base-dev
+RUN apt install -y btop htop inxi neofetch inkscape  gimp wxmaxima liboctave-dev screen
 RUN wget https://download1.rstudio.org/electron/jammy/amd64/rstudio-2026.01.0-392-amd64.deb && dpkg -i rstudio-2026.01.0-392-amd64.deb || apt-get install -f -y
 RUN perl -pi -e "s%/usr/lib/rstudio/rstudio%/usr/lib/rstudio/rstudio --no-sandbox %" /usr/share/applications/rstudio.desktop
 RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.27/quarto-1.8.27-linux-amd64.deb && dpkg -i quarto-1.8.27-linux-amd64.deb || apt-get install -f -y
@@ -38,7 +39,6 @@ RUN add-apt-repository ppa:obsproject/obs-studio
 RUN apt-get update || /bin/true
 RUN apt install -y obs-studio
 RUN wget https://downloads.vivaldi.com/stable/vivaldi-stable_7.8.3925.66-1_amd64.deb && dpkg -i vivaldi-stable_78.3925.66-1_amd64.deb || apt-get install -f -y
-RUN apt install -y btop htop inxi neofetch inkscape  gimp xviewer wxmaxima liboctave-dev
 RUN apt-get clean
 
 ######### End Customizations ###########

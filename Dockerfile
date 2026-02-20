@@ -21,21 +21,23 @@ RUN perl -pi -e "s%/usr/lib/rstudio/rstudio%/usr/lib/rstudio/rstudio --no-sandbo
 RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.27/quarto-1.8.27-linux-amd64.deb && dpkg -i quarto-1.8.27-linux-amd64.deb || apt-get install -f -y
 RUN wget https://downloads.vivaldi.com/stable/vivaldi-stable_7.8.3925.70-1_amd64.deb && dpkg -i vivaldi-stable_7.8.3925.70-1_amd64.deb || apt-get install -f -y
 RUN perl -pi -e "s%/vivaldi-stable%vivaldi-stable --no-sandbox %" /usr/share/applications/vivaldi.desktop
-RUN <<EOT 
-for i in libseafile0t64_9.0.14-1_amd64.deb seafile-cli_9.0.14-1_all.deb python3-seafile_9.0.14-1_all.deb   seafile-daemon_9.0.14-1_amd64.deb  seafile-gui_9.0.14_amd64.deb; do
-  wget https://www.algepop.net/users/alge/seafile-9.0.14-ubuntu24.04/$i
-done
-dpkg -i *seafile*.deb || /bin/true
-apt-get install -f -y
-rm -f *.deb
-EOT
+#RUN <<EOT 
+#for i in libseafile0t64_9.0.14-1_amd64.deb seafile-cli_9.0.14-1_all.deb python3-seafile_9.0.14-1_all.deb   seafile-daemon_9.0.14-1_amd64.deb  seafile-gui_9.0.14_amd64.deb; do
+#  wget https://www.algepop.net/users/alge/seafile-9.0.14-ubuntu24.04/$i
+#done
+#dpkg -i *seafile*.deb || /bin/true
+#apt-get install -f -y
+#rm -f *.deb
+#EOT
+RUN apt-get install -f -y
 RUN flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo && flatpak update -y
 RUN flatpak install -y app/org.onlyoffice.desktopeditors
 RUN flatpak install -y app/org.telegram.desktop
 RUN flatpak install -y app/org.signal.Signal
 # RUN flatpak install -y app/com.xnview.XnViewMP
 # RUN flatpak install -y com.github.IsmaelMartinez.teams_for_linux
-RUN add-apt-repository ppa:obsproject/obs-studio && apt-get update || /bin/true && apt install -y obs-studio || apt-get install -f -y
+RUN add-apt-repository ppa:obsproject/obs-studio && apt-get update || /bin/true
+RUN apt install -y obs-studio 
 RUN apt-get clean
 
 ######### End Customizations ###########

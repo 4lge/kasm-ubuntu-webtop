@@ -11,7 +11,7 @@ WORKDIR $HOME
 
 
 RUN touch $HOME/Desktop/hello.txt
-RUN apt-get update && apt-get install -y build-essential dirmngr apt-transport-https ca-certificates software-properties-common btop htop inxi neofetch inkscape octave less screen pspp emacs-gtk elpa-ess texlive-latex-extra auctex preview-latex-style texlive-bibtex-extra texlive-fonts-extra texlive-formats-extra texlive-extra-utils texmaker  libwmf-bin  texlive-lang-german maxima-emacs maxima-share pspp flatpak libssl-dev libclang-dev
+RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y build-essential dirmngr apt-transport-https ca-certificates software-properties-common btop htop inxi neofetch inkscape octave less screen pspp emacs-gtk elpa-ess texlive-latex-extra auctex preview-latex-style texlive-bibtex-extra texlive-fonts-extra texlive-formats-extra texlive-extra-utils texmaker  libwmf-bin  texlive-lang-german maxima-emacs maxima-share pspp flatpak libssl-dev libclang-dev && apt clean
 RUN gpg --keyserver keyserver.ubuntu.com --recv-key '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7'
 RUN gpg --armor --export '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7' | gpg --dearmor | sudo tee /usr/share/keyrings/cran.gpg > /dev/null
 RUN echo "deb https://cloud.r-project.org/bin/linux/ubuntu noble-cran40/" > /etc/apt/sources.list.d/cran.list &&  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 || /bin/true
@@ -26,6 +26,7 @@ for i in libseafile0t64_9.0.14-1_amd64.deb seafile-cli_9.0.14-1_all.deb python3-
   wget https://www.algepop.net/users/alge/seafile-9.0.14-ubuntu24.04/$i
 done
 dpkg -i *seafile*.deb
+rm -f *.deb
 EOT
 RUN flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo && flatpak update -y
 RUN flatpak install -y app/org.onlyoffice.desktopeditors

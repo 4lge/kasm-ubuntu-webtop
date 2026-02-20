@@ -26,7 +26,7 @@ for i in libseafile0t64_9.0.14-1_amd64.deb seafile-cli_9.0.14-1_all.deb python3-
   wget https://www.algepop.net/users/alge/seafile-9.0.14-ubuntu24.04/$i
 done
 dpkg -i *seafile*.deb || /bin/true
-apt-get install -f
+apt-get install -f -y
 rm -f *.deb
 EOT
 RUN flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo && flatpak update -y
@@ -35,7 +35,7 @@ RUN flatpak install -y app/org.telegram.desktop
 RUN flatpak install -y app/org.signal.Signal
 # RUN flatpak install -y app/com.xnview.XnViewMP
 # RUN flatpak install -y com.github.IsmaelMartinez.teams_for_linux
-RUN add-apt-repository ppa:obsproject/obs-studio && apt-get update || /bin/true && apt install -y obs-studio || apt-get install -f
+RUN add-apt-repository ppa:obsproject/obs-studio && apt-get update || /bin/true && apt install -y obs-studio || apt-get install -f -y
 RUN apt-get clean
 
 ######### End Customizations ###########

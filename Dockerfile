@@ -11,7 +11,10 @@ WORKDIR $HOME
 
 
 RUN touch $HOME/Desktop/hello.txt
-RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y build-essential dirmngr apt-transport-https ca-certificates software-properties-common btop htop inxi neofetch inkscape octave less screen pspp emacs-gtk elpa-ess texlive-latex-extra auctex preview-latex-style texlive-bibtex-extra texlive-fonts-extra texlive-formats-extra texlive-extra-utils texmaker  libwmf-bin  texlive-lang-german maxima-emacs maxima-share pspp flatpak libssl-dev libclang-dev && apt clean
+RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y build-essential dirmngr apt-transport-https ca-certificates \
+  software-properties-common btop htop inxi neofetch inkscape octave less screen pspp emacs-gtk elpa-ess texlive-latex-extra auctex \
+  preview-latex-style texlive-bibtex-extra texlive-fonts-extra texlive-formats-extra texlive-extra-utils texmaker  libwmf-bin \
+  texlive-lang-german maxima-emacs maxima-share pspp flatpak libssl-dev libclang-dev cmake libxmö2-dev libfontconfig1-dev && apt clean
 RUN gpg --keyserver keyserver.ubuntu.com --recv-key '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7'
 RUN gpg --armor --export '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7' | gpg --dearmor | sudo tee /usr/share/keyrings/cran.gpg > /dev/null
 RUN echo "deb https://cloud.r-project.org/bin/linux/ubuntu noble-cran40/" > /etc/apt/sources.list.d/cran.list &&  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 || /bin/true
@@ -20,7 +23,7 @@ RUN wget https://download1.rstudio.org/electron/jammy/amd64/rstudio-2026.01.0-39
 RUN perl -pi -e "s%/usr/lib/rstudio/rstudio%/usr/lib/rstudio/rstudio --no-sandbox %" /usr/share/applications/rstudio.desktop
 RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.27/quarto-1.8.27-linux-amd64.deb && dpkg -i quarto-1.8.27-linux-amd64.deb || apt-get install -f -y
 RUN wget https://downloads.vivaldi.com/stable/vivaldi-stable_7.8.3925.70-1_amd64.deb && dpkg -i vivaldi-stable_7.8.3925.70-1_amd64.deb || apt-get install -f -y
-RUN perl -pi -e "s%/vivaldi-stable%vivaldi-stable --no-sandbox %" /usr/share/applications/vivaldi-stable.desktop
+RUN perl -pi -e "s%vivaldi-stable%vivaldi-stable --no-sandbox %" /usr/share/applications/vivaldi-stable.desktop
 RUN for i in libseafile0t64_9.0.14-1_amd64.deb seafile-cli_9.0.14-1_all.deb python3-seafile_9.0.14-1_all.deb \
          seafile-daemon_9.0.14-1_amd64.deb  seafile-gui_9.0.14_amd64.deb; do \
   wget https://www.algepop.net/users/alge/seafile-9.0.14-ubuntu24.04/$i; \

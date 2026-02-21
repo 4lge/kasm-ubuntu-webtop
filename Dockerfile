@@ -37,8 +37,8 @@ apt-get install -f -y; \
 rm -f *.deb 
 RUN add-apt-repository ppa:obsproject/obs-studio && apt-get update || /bin/true 
 RUN apt install -y obs-studio && apt-get clean
-RUN flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo && flatpak update -y
-RUN flatpak install -y app/com.github.IsmaelMartinez.teams_for_linux
+# RUN flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo && flatpak update -y
+# RUN flatpak install -y app/com.github.IsmaelMartinez.teams_for_linux
 
 ######### End Customizations ###########
 

@@ -14,10 +14,11 @@ RUN touch $HOME/Desktop/hello.txt
 RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y build-essential dirmngr apt-transport-https ca-certificates \
   software-properties-common btop htop inxi neofetch inkscape octave less screen pspp emacs-gtk elpa-ess texlive-latex-extra auctex \
   preview-latex-style texlive-bibtex-extra texlive-fonts-extra texlive-formats-extra texlive-extra-utils texmaker  libwmf-bin \
-  texlive-lang-german maxima-emacs maxima-share pspp flatpak libssl-dev libclang-dev cmake libxml2-dev libfontconfig1-dev && apt clean
+  texlive-lang-german maxima-emacs maxima-share pspp flatpak libssl-dev libclang-dev cmake libxml2-dev libfontconfig1-dev autorandr && apt clean
 RUN gpg --keyserver keyserver.ubuntu.com --recv-key '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7'
 RUN gpg --armor --export '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7' | gpg --dearmor | sudo tee /usr/share/keyrings/cran.gpg > /dev/null
-RUN echo "deb https://cloud.r-project.org/bin/linux/ubuntu noble-cran40/" > /etc/apt/sources.list.d/cran.list &&  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 || /bin/true
+RUN echo "deb https://cloud.r-project.org/bin/linux/ubuntu noble-cran40/" > /etc/apt/sources.list.d/cran.list &&  \
+  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 || /bin/true
 RUN apt-get update || /bin/true && apt-get install -y r-base r-base-dev
 RUN wget https://download2.rstudio.org/server/jammy/amd64/rstudio-server-2026.01.1-403-amd64.deb; \
   dpkg -i rstudio-server-2026.01.1-403-amd64.deb || apt-get install -f -y

@@ -15,7 +15,8 @@ RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y build-essent
   software-properties-common btop htop inxi neofetch inkscape octave less screen pspp emacs-gtk elpa-ess texlive-latex-extra auctex \
   preview-latex-style texlive-bibtex-extra texlive-fonts-extra texlive-formats-extra texlive-extra-utils texmaker  libwmf-bin \
   texlive-lang-german maxima-emacs maxima-share pspp flatpak libssl-dev libclang-dev cmake libxml2-dev libfontconfig1-dev autorandr \
-  libharfbuzz-dev libfribidi-dev fonts-inconsolata g++ git make ocl-icd-libopencl1 ocl-icd-opencl-dev pocl-opencl-icd openjdk-25-jdk gdb valgrind && apt clean
+  libharfbuzz-dev libfribidi-dev fonts-inconsolata g++ git make ocl-icd-libopencl1 ocl-icd-opencl-dev pocl-opencl-icd openjdk-25-jdk \
+  mc gdb valgrind && apt clean
 RUN gpg --keyserver keyserver.ubuntu.com --recv-key '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7'
 RUN gpg --armor --export '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7' | gpg --dearmor | sudo tee /usr/share/keyrings/cran.gpg > /dev/null
 RUN echo "deb https://cloud.r-project.org/bin/linux/ubuntu noble-cran40/" > /etc/apt/sources.list.d/cran.list &&  \
@@ -36,6 +37,11 @@ dpkg -i *seafile*.deb || /bin/true; \
 apt-get install -f -y; \
 rm -f *.deb 
 RUN add-apt-repository ppa:obsproject/obs-studio && apt-get update || /bin/true 
+RUN wget https://www.betterbird.eu/downloads/LinuxArchive/betterbird-140.8.0esr-bb19.en-US.linux-x86_64.tar.xz; \
+  tar xJvfp betterbird-140.8.0esr-bb19.en-US.linux-x86_64.tar.xz; \
+  mv betterbird /opt; ln -sf /opt/betterbird/betterbird /usr/bin/betterbird; \
+  wget https://www.algepop.net/users/alge/Betterbird\ Mail.desktop; \
+  mv Betterbird\ Mail.desktop /usr/share/applications/
 RUN apt install -y obs-studio && apt-get clean
 # RUN flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo && flatpak update -y
 # RUN flatpak install -y app/com.github.IsmaelMartinez.teams_for_linux

@@ -19,7 +19,12 @@ RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y build-essent
   mc gdb valgrind && apt clean
 RUN gpg --keyserver keyserver.ubuntu.com --recv-key '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7'
 RUN gpg --armor --export '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7' | gpg --dearmor | sudo tee /usr/share/keyrings/cran.gpg > /dev/null
-RUN echo "deb https://cloud.r-project.org/bin/linux/ubuntu noble-cran40/" > /etc/apt/sources.list.d/cran.list &&  \
+RUN echo "deb http://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ bookworm universe" > /etc/apt/sources.list.d/cran.list && \
+  wget https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/apt-texmacs.asc \
+  apt-key add apt-texmacs.asc \
+  apt-get update \
+  apt-get install texmacs
+RUN echo "deb https://cloud.r-project.org/bin/linux/ubuntu noble-cran40/" > /etc/apt/sources.list.d/cran.list && \
   apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 || /bin/true
 RUN apt-get update || /bin/true && apt-get install -y r-base r-base-dev
 RUN wget https://download1.rstudio.org/electron/jammy/amd64/rstudio-2026.01.1-403-amd64.deb; \

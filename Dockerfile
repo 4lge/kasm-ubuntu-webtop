@@ -19,7 +19,7 @@ RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y build-essent
   mc gdb valgrind && apt clean
 RUN gpg --keyserver keyserver.ubuntu.com --recv-key '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7'
 RUN gpg --armor --export '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7' | gpg --dearmor | sudo tee /usr/share/keyrings/cran.gpg > /dev/null
-RUN echo "deb http://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ bookworm universe" > /etc/apt/sources.list.d/cran.list; \
+RUN echo "deb http://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ bookworm universe" > /etc/apt/sources.list.d/texmacs.list; \
   wget https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/apt-texmacs.asc ; \
   apt-key add apt-texmacs.asc ; \
   apt-get update ; \

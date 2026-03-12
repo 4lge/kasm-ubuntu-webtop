@@ -23,7 +23,7 @@ RUN echo "deb http://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ bookworm universe"
   wget https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/apt-texmacs.asc ; \
   apt-key add apt-texmacs.asc ; \
   apt-get update ; \
-  apt-get install texmacs
+  apt-get install -y texmacs
 RUN echo "deb https://cloud.r-project.org/bin/linux/ubuntu noble-cran40/" > /etc/apt/sources.list.d/cran.list && \
   apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 || /bin/true
 RUN apt-get update || /bin/true && apt-get install -y r-base r-base-dev

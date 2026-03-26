@@ -31,8 +31,10 @@ RUN wget https://download1.rstudio.org/electron/jammy/amd64/rstudio-2026.01.1-40
   dpkg -i rstudio-2026.01.1-403-amd64.deb || apt-get install -f -y
 RUN perl -pi -e "s%/usr/lib/rstudio/rstudio%/usr/lib/rstudio/rstudio --no-sandbox %" /usr/share/applications/rstudio.desktop
 RUN R CMD javareconf || /bin/true
-RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.27/quarto-1.8.27-linux-amd64.deb && dpkg -i quarto-1.8.27-linux-amd64.deb || apt-get install -f -y
-RUN wget https://downloads.vivaldi.com/stable/vivaldi-stable_7.8.3925.70-1_amd64.deb && dpkg -i vivaldi-stable_7.8.3925.70-1_amd64.deb || apt-get install -f -y
+RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.10.0/quarto-1.10.0-linux-amd64.deb && \
+  dpkg -i quarto-1.10.0-linux-amd64.deb || apt-get install -f -y
+RUN wget https://downloads.vivaldi.com/stable/vivaldi-stable_7.9.3970.45-1_amd64.deb && \
+  dpkg -i vivaldi-stable_7.9.3970.45-1_amd64.deb || apt-get install -f -y
 RUN perl -pi -e "s%vivaldi-stable%vivaldi-stable --no-sandbox %" /usr/share/applications/vivaldi-stable.desktop
 RUN for i in libseafile0t64_9.0.14-1_amd64.deb seafile-cli_9.0.14-1_all.deb python3-seafile_9.0.14-1_all.deb \
          seafile-daemon_9.0.14-1_amd64.deb  seafile-gui_9.0.14_amd64.deb; do \
@@ -42,8 +44,8 @@ dpkg -i *seafile*.deb || /bin/true; \
 apt-get install -f -y; \
 rm -f *.deb 
 RUN add-apt-repository ppa:obsproject/obs-studio && apt-get update || /bin/true 
-RUN wget https://www.betterbird.eu/downloads/LinuxArchive/betterbird-140.8.0esr-bb19.en-US.linux-x86_64.tar.xz; \
-  tar xJvfp betterbird-140.8.0esr-bb19.en-US.linux-x86_64.tar.xz; \
+RUN wget https://www.betterbird.eu/downloads/LinuxArchive/betterbird-140.9.0esr-bb20.en-US.linux-x86_64.tar.xz; \
+  tar xJvfp betterbird-140.9.0esr-bb20.en-US.linux-x86_64.tar.xz; \
   mv betterbird /opt; ln -sf /opt/betterbird/betterbird /usr/bin/betterbird; \
   wget https://www.algepop.net/users/alge/Betterbird\ Mail.desktop; \
   mv Betterbird\ Mail.desktop /usr/share/applications/

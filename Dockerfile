@@ -11,12 +11,12 @@ WORKDIR $HOME
 
 
 RUN touch $HOME/Desktop/hello.txt
-RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y build-essential dirmngr apt-transport-https ca-certificates \
+RUN perl -pi -e "s/Types: deb/Types: deb deb-src/" /etc/apt/sources.list.d/ubuntu.sources && apt-get update && apt-get dist-upgrade -y && apt-get install -y build-essential dirmngr apt-transport-https ca-certificates \
   software-properties-common btop htop inxi neofetch inkscape octave less screen pspp emacs-gtk elpa-ess texlive-latex-extra auctex \
   preview-latex-style texlive-bibtex-extra texlive-fonts-extra texlive-formats-extra texlive-extra-utils texmaker  libwmf-bin \
   texlive-lang-german maxima-emacs maxima-share pspp flatpak libssl-dev libclang-dev cmake libxml2-dev libfontconfig1-dev autorandr \
   libharfbuzz-dev libfribidi-dev fonts-inconsolata g++ git make ocl-icd-libopencl1 ocl-icd-opencl-dev pocl-opencl-icd openjdk-25-jdk \
-  mc gdb valgrind libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev libwebp-dev libcurl4-openssl-dev && apt clean
+  mc gdb valgrind libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev libwebp-dev libcurl4-openssl-dev rsync vim-gtk3 golang && apt clean
 RUN gpg --keyserver keyserver.ubuntu.com --recv-key '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7'
 RUN gpg --armor --export '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7' | gpg --dearmor | sudo tee /usr/share/keyrings/cran.gpg > /dev/null
 RUN echo "deb http://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ bookworm universe" > /etc/apt/sources.list.d/texmacs.list; \

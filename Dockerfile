@@ -18,7 +18,7 @@ RUN perl -pi -e "s/Types: deb/Types: deb deb-src/" /etc/apt/sources.list.d/ubunt
   libharfbuzz-dev libfribidi-dev fonts-inconsolata g++ git make ocl-icd-libopencl1 ocl-icd-opencl-dev pocl-opencl-icd openjdk-25-jdk \
   mc gdb valgrind libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev libwebp-dev libcurl4-openssl-dev rsync vim-gtk3 golang sbcl bc \
   ncal remmina freerdp3-x11 remmina-plugin-exec remmina-plugin-python remmina-plugin-spice remmina-plugin-www  remmina-plugin-x2go \
-  ssvnc && apt clean
+  ssvnc libuv1-dev && apt clean
 RUN gpg --keyserver keyserver.ubuntu.com --recv-key '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7'
 RUN gpg --armor --export '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7' | gpg --dearmor | sudo tee /usr/share/keyrings/cran.gpg > /dev/null
 RUN echo "deb http://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ bookworm universe" > /etc/apt/sources.list.d/texmacs.list; \
@@ -46,12 +46,12 @@ dpkg -i *seafile*.deb || /bin/true; \
 apt-get install -f -y; \
 rm -f *.deb 
 RUN add-apt-repository ppa:obsproject/obs-studio && apt-get update || /bin/true 
-RUN wget https://www.betterbird.eu/downloads/LinuxArchive/betterbird-140.10.1esr-bb22.en-US.linux-x86_64.tar.xz \
+RUN apt install -y obs-studio && apt-get clean
+RUN wget https://www.betterbird.eu/downloads/LinuxArchive/betterbird-140.10.1esr-bb22.en-US.linux-x86_64.tar.xz; \
   tar xJvfp betterbird-140.10.1esr-bb22.en-US.linux-x86_64.tar.xz; \
   mv betterbird /opt; ln -sf /opt/betterbird/betterbird /usr/bin/betterbird; \
   wget https://www.algepop.net/users/alge/Betterbird\ Mail.desktop; \
   mv Betterbird\ Mail.desktop /usr/share/applications/
-RUN apt install -y obs-studio && apt-get clean
 # RUN flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo && flatpak update -y
 # RUN flatpak install -y app/com.github.IsmaelMartinez.teams_for_linux
 

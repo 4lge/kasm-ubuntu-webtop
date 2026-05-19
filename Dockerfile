@@ -19,6 +19,7 @@ RUN perl -pi -e "s/Types: deb/Types: deb deb-src/" /etc/apt/sources.list.d/ubunt
   mc gdb valgrind libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev libwebp-dev libcurl4-openssl-dev rsync vim-gtk3 golang sbcl bc \
   ncal remmina freerdp3-x11 remmina-plugin-exec remmina-plugin-python remmina-plugin-spice remmina-plugin-www  remmina-plugin-x2go \
   ssvnc libuv1-dev && apt clean
+RUN echo "y" | /usr/bin/unminimize || /bin/true
 RUN gpg --keyserver keyserver.ubuntu.com --recv-key '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7'
 RUN gpg --armor --export '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7' | gpg --dearmor | sudo tee /usr/share/keyrings/cran.gpg > /dev/null
 RUN echo "deb http://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ bookworm universe" > /etc/apt/sources.list.d/texmacs.list; \

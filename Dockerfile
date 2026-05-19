@@ -11,7 +11,7 @@ WORKDIR $HOME
 
 
 RUN touch $HOME/Desktop/hello.txt
-RUN perl -pi -e "s/Types: deb/Types: deb deb-src/" /etc/apt/sources.list.d/ubuntu.sources && apt-get update && apt-get dist-upgrade -y && apt-get install -y build-essential dirmngr apt-transport-https ca-certificates \
+RUN echo "y" | /usr/bin/unminimize || /bin true; perl -pi -e "s/Types: deb/Types: deb deb-src/" /etc/apt/sources.list.d/ubuntu.sources && apt-get update && apt-get dist-upgrade -y && apt-get install -y build-essential dirmngr apt-transport-https ca-certificates \
   software-properties-common btop htop inxi neofetch inkscape octave less screen pspp emacs-gtk elpa-ess texlive-latex-extra auctex \
   preview-latex-style texlive-bibtex-extra texlive-fonts-extra texlive-formats-extra texlive-extra-utils texmaker  libwmf-bin \
   texlive-lang-german maxima-emacs maxima-share pspp flatpak libssl-dev libclang-dev cmake libxml2-dev libfontconfig1-dev autorandr \
@@ -19,15 +19,14 @@ RUN perl -pi -e "s/Types: deb/Types: deb deb-src/" /etc/apt/sources.list.d/ubunt
   mc gdb valgrind libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev libwebp-dev libcurl4-openssl-dev rsync vim-gtk3 golang sbcl bc \
   ncal remmina freerdp3-x11 remmina-plugin-exec remmina-plugin-python remmina-plugin-spice remmina-plugin-www  remmina-plugin-x2go \
   ssvnc libuv1-dev && apt clean
-RUN echo "y" | /usr/bin/unminimize || /bin/true
-RUN gpg --keyserver keyserver.ubuntu.com --recv-key '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7'
-RUN gpg --armor --export '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7' | gpg --dearmor | sudo tee /usr/share/keyrings/cran.gpg > /dev/null
 RUN echo "deb http://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ bookworm universe" > /etc/apt/sources.list.d/texmacs.list; \
   wget https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/apt-texmacs.asc ; \
   apt-key add apt-texmacs.asc ; \
   apt-get update ; \
   apt-get install -y texmacs
-RUN echo "deb https://cloud.r-project.org/bin/linux/ubuntu noble-cran40/" > /etc/apt/sources.list.d/cran.list && \
+RUN gpg --keyserver keyserver.ubuntu.com --recv-key '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7'; \
+  gpg --armor --export '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7' | gpg --dearmor | sudo tee /usr/share/keyrings/cran.gpg > /dev/null; \
+  echo "deb https://cloud.r-project.org/bin/linux/ubuntu noble-cran40/" > /etc/apt/sources.list.d/cran.list && \
   apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 || /bin/true
 RUN apt-get update || /bin/true && apt-get install -y r-base r-base-dev
 RUN wget https://download1.rstudio.org/electron/jammy/amd64/rstudio-2026.04.0-526-amd64.deb && \

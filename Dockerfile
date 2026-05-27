@@ -18,7 +18,7 @@ RUN echo "y" | /usr/bin/unminimize || /bin true; perl -pi -e "s/Types: deb/Types
   libharfbuzz-dev libfribidi-dev fonts-inconsolata g++ git make ocl-icd-libopencl1 ocl-icd-opencl-dev pocl-opencl-icd openjdk-25-jdk \
   mc gdb valgrind libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev libwebp-dev libcurl4-openssl-dev rsync vim-gtk3 golang sbcl bc \
   ncal remmina freerdp3-x11 remmina-plugin-exec remmina-plugin-python remmina-plugin-spice remmina-plugin-www  remmina-plugin-x2go \
-  ssvnc libuv1-dev && apt clean
+  ssvnc libuv1-dev xournalpp golang-go neovim && apt clean
 RUN echo "deb http://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ bookworm universe" > /etc/apt/sources.list.d/texmacs.list; \
   wget https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/apt-texmacs.asc ; \
   apt-key add apt-texmacs.asc ; \

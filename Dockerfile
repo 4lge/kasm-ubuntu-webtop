@@ -47,8 +47,12 @@ apt-get install -f -y; \
 rm -f *.deb 
 RUN add-apt-repository ppa:obsproject/obs-studio && apt-get update || /bin/true 
 RUN apt install -y obs-studio && apt-get clean
-RUN wget https://www.betterbird.eu/downloads/LinuxArchive/betterbird-140.10.1esr-bb22.en-US.linux-x86_64.tar.xz; \
-  tar xJvfp betterbird-140.10.1esr-bb22.en-US.linux-x86_64.tar.xz; \
+RUN wget "https://www.betterbird.eu/downloads/getloc.php?os=linux&lang=en-US&version=release" -O download.txt
+; \
+  DL=$(cat download.txt); \
+  DLFILE=${DL##*/}; \
+  wget $DL; \
+  tar xJvfp $DLFILE; \
   mv betterbird /opt; ln -sf /opt/betterbird/betterbird /usr/bin/betterbird; \
   wget https://www.algepop.net/users/alge/Betterbird\ Mail.desktop; \
   mv Betterbird\ Mail.desktop /usr/share/applications/

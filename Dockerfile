@@ -37,8 +37,8 @@ RUN perl -pi -e "s%/usr/lib/rstudio/rstudio%/usr/lib/rstudio/rstudio --no-sandbo
 RUN R CMD javareconf || /bin/true
 RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.10.5/quarto-1.10.5-linux-amd64.deb && \
   dpkg -i quarto-1.10.5-linux-amd64.deb || apt-get install -f -y
-RUN wget https://downloads.vivaldi.com/stable/vivaldi-stable_8.0.4033.50-1_amd64.deb && \
-  dpkg -i vivaldi-stable_8.0.4033.50-1_amd64.deb || apt-get install -f -y
+RUN wget https://downloads.vivaldi.com/stable/vivaldi-stable_8.0.4033.54-1_amd64.deb && \
+  dpkg -i vivaldi-stable_8.0.4033.54-1_amd64.deb || apt-get install -f -y
 RUN perl -pi -e "s%vivaldi-stable%vivaldi-stable --no-sandbox %" /usr/share/applications/vivaldi-stable.desktop
 RUN for i in libseafile0t64_9.0.14-1_amd64.deb seafile-cli_9.0.14-1_all.deb python3-seafile_9.0.14-1_all.deb \
          seafile-daemon_9.0.14-1_amd64.deb  seafile-gui_9.0.14_amd64.deb; do \

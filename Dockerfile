@@ -11,8 +11,8 @@ WORKDIR $HOME
 
 
 RUN touch $HOME/Desktop/hello.txt
-RUN echo "y" | /usr/bin/unminimize || /bin true; perl -pi -e "s/Types: deb/Types: deb deb-src/" /etc/apt/sources.list.d/ubuntu.sources && apt-get update && apt-get dist-upgrade -y && apt-get install -y build-essential dirmngr apt-transport-https ca-certificates \
-  software-properties-common btop htop inxi neofetch inkscape octave less screen pspp emacs-gtk elpa-ess texlive-latex-extra auctex \
+RUN echo "y" | /usr/bin/unminimize || /bin true; perl -pi -e "s/Types: deb/Types: deb deb-src/" /etc/apt/sources.list.d/ubuntu.sources && apt-get update && apt-get dist-upgrade -y && apt-get install -y build-essential dirmngr apt-transport-https ca-certificates
+RUN software-properties-common btop htop inxi neofetch inkscape octave less screen pspp emacs-gtk elpa-ess texlive-latex-extra auctex \
   preview-latex-style texlive-bibtex-extra texlive-fonts-extra texlive-formats-extra texlive-extra-utils texmaker  libwmf-bin \
   texlive-lang-german maxima-emacs maxima-share pspp flatpak libssl-dev libclang-dev cmake libxml2-dev libfontconfig1-dev autorandr \
   libharfbuzz-dev libfribidi-dev fonts-inconsolata g++ git make ocl-icd-libopencl1 ocl-icd-opencl-dev pocl-opencl-icd openjdk-25-jdk \

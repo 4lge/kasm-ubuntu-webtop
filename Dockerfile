@@ -21,8 +21,8 @@ RUN apt-get install -y build-essential dirmngr apt-transport-https ca-certificat
   mc gdb valgrind libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev libwebp-dev libcurl4-openssl-dev rsync vim-gtk3 golang sbcl bc \
   ncal remmina freerdp3-x11 remmina-plugin-exec remmina-plugin-python remmina-plugin-spice remmina-plugin-www  remmina-plugin-x2go \
   ssvnc libuv1-dev xournalpp golang-go neovim && apt clean
-RUN echo "deb http://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ bookworm universe" > /etc/apt/sources.list.d/texmacs.list; \
-  wget https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/apt-texmacs.asc ; \
+RUN echo "deb http://web.archive.org/web/20241225225123/ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ bookworm universe" > /etc/apt/sources.list.d/texmacs.list; \
+  wget https://web.archive.org/web/20241225225123/ftp.texmacs.org/TeXmacs/tmftp/repos/apt/apt-texmacs.asc ; \
   apt-key add apt-texmacs.asc ; \
   apt-get update ; \
   apt-get install -y texmacs

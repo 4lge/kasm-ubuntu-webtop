@@ -47,8 +47,7 @@ apt-get install -f -y; \
 rm -f *.deb 
 RUN add-apt-repository ppa:obsproject/obs-studio && apt-get update || /bin/true 
 RUN apt install -y obs-studio && apt-get clean
-RUN wget "https://www.betterbird.eu/downloads/getloc.php?os=linux&lang=en-US&version=release" -O download.txt
-; \
+RUN wget "https://www.betterbird.eu/downloads/getloc.php?os=linux&lang=en-US&version=release" -O download.txt; \
   DL=$(cat download.txt); \
   DLFILE=${DL##*/}; \
   wget $DL; \

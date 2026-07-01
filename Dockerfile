@@ -22,10 +22,9 @@ RUN apt-get install -y build-essential dirmngr apt-transport-https ca-certificat
   ncal remmina freerdp3-x11 remmina-plugin-exec remmina-plugin-python remmina-plugin-spice remmina-plugin-www  remmina-plugin-x2go \
   ssvnc libuv1-dev xournalpp golang-go neovim && apt clean
 RUN apt-get install -y texlive-fonts-extra && apt clean
-RUN echo "deb http://web.archive.org/web/20241225225123/ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ bookworm universe" > /etc/apt/sources.list.d/texmacs.list; \
-  wget https://web.archive.org/web/20241225225123/ftp.texmacs.org/TeXmacs/tmftp/repos/apt/apt-texmacs.asc ; \
-  apt-key add apt-texmacs.asc ; \
-  apt-get update ; \
+RUN wget -qO- --no-check-certificate https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/apt-texmacs.asc | gpg --dearmor | sudo tee /usr/share/keyrings/texmacs-keyring.gpg > /dev/null; \
+  echo "deb [signed-by=/usr/share/keyrings/texmacs-keyring.gpg] http://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/texmacs.list > /dev/null; \
+  apt-get update ;\
   apt-get install -y texmacs
 RUN gpg --keyserver keyserver.ubuntu.com --recv-key '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7'; \
   gpg --armor --export '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7' | gpg --dearmor | sudo tee /usr/share/keyrings/cran.gpg > /dev/null; \

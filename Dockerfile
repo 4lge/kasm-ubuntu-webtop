@@ -31,8 +31,8 @@ RUN gpg --keyserver keyserver.ubuntu.com --recv-key '95C0FAF38DB3CCAD0C080A7BDC7
   echo "deb https://cloud.r-project.org/bin/linux/ubuntu noble-cran40/" > /etc/apt/sources.list.d/cran.list && \
   apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 || /bin/true
 RUN apt-get update || /bin/true && apt-get install -y r-base r-base-dev
-RUN wget https://download1.rstudio.org/electron/jammy/amd64/rstudio-2026.05.1-225-amd64.deb && \
-  dpkg -i rstudio-2026.05.1-225-amd64.deb || apt-get install -f -y
+RUN wget https://download1.rstudio.org/electron/jammy/amd64/rstudio-2026.06.0-242-amd64.deb && \
+  dpkg -i rstudio-2026.06.0-242-amd64.deb || apt-get install -f -y
 RUN perl -pi -e "s%/usr/lib/rstudio/rstudio%/usr/lib/rstudio/rstudio --no-sandbox %" /usr/share/applications/rstudio.desktop
 RUN R CMD javareconf || /bin/true
 RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.10.5/quarto-1.10.5-linux-amd64.deb && \

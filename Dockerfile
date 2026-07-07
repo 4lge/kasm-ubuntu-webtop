@@ -58,7 +58,7 @@ RUN wget "https://www.betterbird.eu/downloads/getloc.php?os=linux&lang=en-US&ver
   wget https://www.algepop.net/users/alge/Betterbird\ Mail.desktop; \
   mv Betterbird\ Mail.desktop /usr/share/applications/
 RUN wget "https://sourceforge.net/projects/kicad-appimage/files/v8/KiCad-8.0.9.glibc2.29-x86_64.AppImage/download" \
-  -O /opt/KiCad-8.0.9.glibc2.29-x86_64.AppImage; \
+  -O KiCad-8.0.9.glibc2.29-x86_64.AppImage; \
   chmod 755 ./KiCad-8.0.9.glibc2.29-x86_64.AppImage ; \
   ./KiCad-8.0.9.glibc2.29-x86_64.AppImage --appimage-extract; \
   rm -f ./KiCad-8.0.9.glibc2.29-x86_64.AppImage; \

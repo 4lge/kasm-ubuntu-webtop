@@ -20,7 +20,7 @@ RUN apt-get install -y build-essential dirmngr apt-transport-https ca-certificat
   libharfbuzz-dev libfribidi-dev fonts-inconsolata g++ git make ocl-icd-libopencl1 ocl-icd-opencl-dev pocl-opencl-icd openjdk-25-jdk \
   mc gdb valgrind libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev libwebp-dev libcurl4-openssl-dev rsync vim-gtk3 golang sbcl bc \
   ncal remmina freerdp3-x11 remmina-plugin-exec remmina-plugin-python remmina-plugin-spice remmina-plugin-www  remmina-plugin-x2go \
-  ssvnc libuv1-dev xournalpp golang-go neovim && apt clean
+  ssvnc libuv1-dev xournalpp golang-go neovim openscad-mcad meshlab geomview && apt clean
 RUN apt-get install -y texlive-fonts-extra && apt clean
 RUN wget -qO- --no-check-certificate https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/apt-texmacs.asc | gpg --dearmor | sudo tee /usr/share/keyrings/texmacs-keyring.gpg > /dev/null; \
   echo "deb [signed-by=/usr/share/keyrings/texmacs-keyring.gpg] http://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/texmacs.list > /dev/null; \
@@ -57,6 +57,19 @@ RUN wget "https://www.betterbird.eu/downloads/getloc.php?os=linux&lang=en-US&ver
   mv betterbird /opt; ln -sf /opt/betterbird/betterbird /usr/bin/betterbird; \
   wget https://www.algepop.net/users/alge/Betterbird\ Mail.desktop; \
   mv Betterbird\ Mail.desktop /usr/share/applications/
+RUN wget "https://sourceforge.net/projects/kicad-appimage/files/v8/KiCad-8.0.9.glibc2.29-x86_64.AppImage/download" \
+  -O /opt/KiCad-8.0.9.glibc2.29-x86_64.AppImage; \
+  chmod 755 ./KiCad-8.0.9.glibc2.29-x86_64.AppImage ; \
+  ./KiCad-8.0.9.glibc2.29-x86_64.AppImage --appimage-extract; \
+  rm -f ./KiCad-8.0.9.glibc2.29-x86_64.AppImage; \
+  mv squashfs-root kicad-appimage; \
+  ln -sf /opt/kicad-appimage/AppRun /usr/bin/kicad;\
+  ln -sf /opt/kicad-appimage/org.kicad.kicad.desktop /usr/share/applications
+RUN wget "https://github.com/Ultimaker/Cura/releases/download/5.12.0/UltiMaker-Cura-5.12.0-linux-X64.AppImage"; \
+  chmod 755 UltiMaker-Cura-5.12.0-linux-X64.AppImage; \
+  ./UltiMaker-Cura-5.12.0-linux-X64.AppImage --appimage-extract; \
+  ln -sf /opt/ultimaker-cura-appimage/AppRun /usr/bin/cura;\
+  ln -sf /opt/ultimaker-cura-appimage/com.ultimaker.cura.desktop /usr/share/applications/
 # RUN flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo && flatpak update -y
 # RUN flatpak install -y app/com.github.IsmaelMartinez.teams_for_linux
 

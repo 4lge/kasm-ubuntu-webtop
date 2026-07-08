@@ -22,15 +22,16 @@ RUN apt-get install -y build-essential dirmngr apt-transport-https ca-certificat
   ncal remmina freerdp3-x11 remmina-plugin-exec remmina-plugin-python remmina-plugin-spice remmina-plugin-www  remmina-plugin-x2go \
   ssvnc libuv1-dev xournalpp golang-go neovim openscad-mcad meshlab geomview && apt clean
 RUN apt-get install -y texlive-fonts-extra && apt clean
+RUN apt-get install -y lxqt && apt-get clean
 RUN wget -qO- --no-check-certificate https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/apt-texmacs.asc | gpg --dearmor | sudo tee /usr/share/keyrings/texmacs-keyring.gpg > /dev/null; \
   echo "deb [signed-by=/usr/share/keyrings/texmacs-keyring.gpg] http://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/texmacs.list > /dev/null; \
   apt-get update ;\
-  apt-get install -y texmacs
+  apt-get install -y texmacs && apt-get clean
 RUN gpg --keyserver keyserver.ubuntu.com --recv-key '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7'; \
   gpg --armor --export '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7' | gpg --dearmor | sudo tee /usr/share/keyrings/cran.gpg > /dev/null; \
   echo "deb https://cloud.r-project.org/bin/linux/ubuntu noble-cran40/" > /etc/apt/sources.list.d/cran.list && \
   apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 || /bin/true
-RUN apt-get update || /bin/true && apt-get install -y r-base r-base-dev
+RUN apt-get update || /bin/true && apt-get install -y r-base r-base-dev && apt-get clean
 RUN wget https://download1.rstudio.org/electron/jammy/amd64/rstudio-2026.06.0-242-amd64.deb && \
   dpkg -i rstudio-2026.06.0-242-amd64.deb || apt-get install -f -y
 RUN perl -pi -e "s%/usr/lib/rstudio/rstudio%/usr/lib/rstudio/rstudio --no-sandbox %" /usr/share/applications/rstudio.desktop

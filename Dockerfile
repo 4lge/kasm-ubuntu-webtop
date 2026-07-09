@@ -20,7 +20,7 @@ RUN apt-get install -y build-essential dirmngr apt-transport-https ca-certificat
   libharfbuzz-dev libfribidi-dev fonts-inconsolata g++ git make ocl-icd-libopencl1 ocl-icd-opencl-dev pocl-opencl-icd openjdk-25-jdk \
   mc gdb valgrind libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev libwebp-dev libcurl4-openssl-dev rsync vim-gtk3 golang sbcl bc \
   ncal remmina freerdp3-x11 remmina-plugin-exec remmina-plugin-python remmina-plugin-spice remmina-plugin-www  remmina-plugin-x2go \
-  ssvnc libuv1-dev xournalpp golang-go neovim openscad-mcad meshlab geomview && apt clean
+  ssvnc libuv1-dev xournalpp golang-go neovim openscad-mcad meshlab geomview freecad && apt clean
 RUN apt-get install -y texlive-fonts-extra && apt clean
 RUN apt-get install -y lxqt && apt-get clean
 RUN wget -qO- --no-check-certificate https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/apt-texmacs.asc | gpg --dearmor | sudo tee /usr/share/keyrings/texmacs-keyring.gpg > /dev/null; \

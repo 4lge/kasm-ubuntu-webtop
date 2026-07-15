@@ -66,21 +66,27 @@ RUN wget "https://sourceforge.net/projects/kicad-appimage/files/v8/KiCad-8.0.9.g
   mv squashfs-root /opt/kicad-appimage; \
   ln -sf /opt/kicad-appimage/AppRun /usr/bin/kicad;\
   ln -sf /opt/kicad-appimage/org.kicad.kicad.desktop /usr/share/applications; \
-  perl -pi -e "s/AppRun - --single-instance /\/usr\/bin\/kicad/g" /usr/share/applications/org.kicad.kicad.desktop;
+  perl -pi -e "s/AppRun - --single-instance /\/usr\/bin\/kicad/g" /usr/share/applications/org.kicad.kicad.desktop;\
+  ln -sf /opt/kicad-appimage/kicad.png /usr/share/icons/hicolor/128x128/
 RUN wget "https://github.com/Ultimaker/Cura/releases/download/5.12.0/UltiMaker-Cura-5.12.0-linux-X64.AppImage"; \
   chmod 755 UltiMaker-Cura-5.12.0-linux-X64.AppImage; \
   ./UltiMaker-Cura-5.12.0-linux-X64.AppImage --appimage-extract; \
   mv squashfs-root /opt/ultimaker-cura-appimage; \
   ln -sf /opt/ultimaker-cura-appimage/AppRun /usr/bin/cura;\
   ln -sf /opt/ultimaker-cura-appimage/com.ultimaker.cura.desktop /usr/share/applications/;\
-  perl -pi -e "s/AppRun - --single-instance /\/usr\/bin\/cura/g" /usr/share/applications/org.ultimaker.cura.desktop;
+  perl -pi -e "s/AppRun - --single-instance /\/usr\/bin\/cura/g" /usr/share/applications/org.ultimaker.cura.desktop;\
+  ln -sf /opt/ultimaker-cura-appimage/cura-icon.png /usr/share/icons/hicolor/128x128/
 RUN wget "https://github.com/FreeCAD/FreeCAD/releases/download/1.1.1/FreeCAD_1.1.1-Linux-x86_64-py311.AppImage"; \
   chmod 755 FreeCAD_1.1.1-Linux-x86_64-py311.AppImage; \
   ./FreeCAD_1.1.1-Linux-x86_64-py311.AppImage --appimage-extract; \
   mv squashfs-root /opt/freecad-appimage; \
   ln -sf /opt/freecad-appimage/AppRun /usr/bin/freecad;\
   ln -sf /opt/freecad-appimage/org.freecad.FreeCAD.desktop /usr/share/applications/; \
-  perl -pi -e "s/AppRun - --single-instance /\/usr\/bin\/freecad/g" /usr/share/applications/org.freecad.FreeCAD.desktop;
+  perl -pi -e "s/AppRun - --single-instance /\/usr\/bin\/freecad/g" /usr/share/applications/org.freecad.FreeCAD.desktop;\
+  ln -sf /opt/freecad-appimage/org.freecad.FreeCAD.svg /usr/share/icons/hicolor/128x128/
+RUN wget "https://github.com/imputnet/helium-linux/releases/download/0.14.5.1/helium-bin_0.14.5.1-1_amd64.deb"; \
+  dpkg -i helium-bin_0.14.5.1-1_amd64.deb; \
+  rm -f helium-bin_0.14.5.1-1_amd64.deb
 
   
 

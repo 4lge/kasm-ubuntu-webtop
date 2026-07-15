@@ -63,12 +63,13 @@ RUN wget "https://sourceforge.net/projects/kicad-appimage/files/v8/KiCad-8.0.9.g
   chmod 755 ./KiCad-8.0.9.glibc2.29-x86_64.AppImage ; \
   ./KiCad-8.0.9.glibc2.29-x86_64.AppImage --appimage-extract; \
   rm -f ./KiCad-8.0.9.glibc2.29-x86_64.AppImage; \
-  mv squashfs-root kicad-appimage; \
+  mv squashfs-root /opt/kicad-appimage; \
   ln -sf /opt/kicad-appimage/AppRun /usr/bin/kicad;\
   ln -sf /opt/kicad-appimage/org.kicad.kicad.desktop /usr/share/applications
 RUN wget "https://github.com/Ultimaker/Cura/releases/download/5.12.0/UltiMaker-Cura-5.12.0-linux-X64.AppImage"; \
   chmod 755 UltiMaker-Cura-5.12.0-linux-X64.AppImage; \
   ./UltiMaker-Cura-5.12.0-linux-X64.AppImage --appimage-extract; \
+  mv squashfs-root /opt/ultimaker-cura-appimage; \
   ln -sf /opt/ultimaker-cura-appimage/AppRun /usr/bin/cura;\
   ln -sf /opt/ultimaker-cura-appimage/com.ultimaker.cura.desktop /usr/share/applications/
 # RUN flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo && flatpak update -y

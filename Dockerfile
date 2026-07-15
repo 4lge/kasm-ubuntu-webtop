@@ -86,7 +86,9 @@ RUN wget "https://github.com/FreeCAD/FreeCAD/releases/download/1.1.1/FreeCAD_1.1
   ln -sf /opt/freecad-appimage/org.freecad.FreeCAD.svg /usr/share/icons/hicolor/128x128/
 RUN wget "https://github.com/imputnet/helium-linux/releases/download/0.14.5.1/helium-bin_0.14.5.1-1_amd64.deb"; \
   dpkg -i helium-bin_0.14.5.1-1_amd64.deb; \
-  rm -f helium-bin_0.14.5.1-1_amd64.deb
+  rm -f helium-bin_0.14.5.1-1_amd64.deb; \
+  perl -pi -e "s%helium%helium --no-sandbox %" /usr/share/applications/helium.desktop 
+
 
   
 

@@ -74,7 +74,7 @@ RUN wget "https://github.com/Ultimaker/Cura/releases/download/5.12.0/UltiMaker-C
   mv squashfs-root /opt/ultimaker-cura-appimage; \
   ln -sf /opt/ultimaker-cura-appimage/AppRun /usr/bin/cura;\
   ln -sf /opt/ultimaker-cura-appimage/com.ultimaker.cura.desktop /usr/share/applications/;\
-  perl -pi -e "s/AppRun - --single-instance /\/usr\/bin\/cura/g" /usr/share/applications/org.ultimaker.cura.desktop;\
+  perl -pi -e "s/UltiMaker-Cura/\/usr\/bin\/cura/g" /usr/share/applications/org.ultimaker.cura.desktop;\
   ln -sf /opt/ultimaker-cura-appimage/cura-icon.png /usr/share/icons/hicolor/128x128/
 RUN wget "https://github.com/FreeCAD/FreeCAD/releases/download/1.1.1/FreeCAD_1.1.1-Linux-x86_64-py311.AppImage"; \
   chmod 755 FreeCAD_1.1.1-Linux-x86_64-py311.AppImage; \
